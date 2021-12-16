@@ -1,7 +1,9 @@
 package com.example.bestmovie2.model
 
 interface Repository {
-    fun getWeatherFromServer(): Movie
+    fun getMovieFromServer(): Movie
 
-    fun getWeatherFromLocalStorage(): Movie
+    fun getMovieFromLocalStorageRus(): List<Movie>
+
+    fun getWeatherFromLocalStorageWorld(): List<Movie>
 }

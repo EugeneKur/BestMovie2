@@ -14,19 +14,28 @@ class MainViewModel : ViewModel() {
 
     fun getData(): LiveData<AppState> = liveDataToObserve
 
-    fun getWeather() {
+    fun getMovieFromLocalStorageRus() = getDataFromLocalSource(true)
+
+    fun getMovieFromLocalStorageWorld() = getDataFromLocalSource(false)
+
+    fun getMovieFromRemoteSource() = getDataFromLocalSource(true)
+
+    private fun getDataFromLocalSource(isRussian: Boolean = true) {
         liveDataToObserve.value = AppState.Loading
 
         Thread {
             Thread.sleep(2000)
 
-            if (Random.nextBoolean()) {
-                val movie = repo.getWeatherFromServer()
+
+                val movie = if (isRussian) {
+                    repo.getMovieFromLocalStorageRus()
+                } else {
+                    repo.getWeatherFromLocalStorageWorld()
+                }
                 liveDataToObserve.postValue(AppState.Success(movie))
-            } else {
-                liveDataToObserve.postValue(AppState.Error(Exception("Проверьте интрнет")))
-            }
+
 
         }.start()
     }
+
 }
