@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bestmovie2.R
 import com.example.bestmovie2.viewmodel.MainViewModel
 import com.example.bestmovie2.databinding.MainFragmentBinding
+import com.example.bestmovie2.model.Movie
 import com.example.bestmovie2.viewmodel.AppState
 import com.google.android.material.snackbar.Snackbar
 
@@ -19,6 +22,8 @@ class MainFragment : Fragment() {
 
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
+    private val adapter = MainAdapter()
+    private var isRussian = true
 
     private lateinit var viewModel: MainViewModel
 
@@ -34,6 +39,22 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.mainRecyclerView.adapter = adapter
+
+
+
+        adapter.listener = MainAdapter.OnItemClick { movie ->
+
+            val bundle = Bundle()
+            bundle.putParcelable("MOVIE_EXTRA", movie)
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, DetailFragment.newInstance(bundle))
+                .addToBackStack("")
+                .commit()
+        }
+
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         // Подписались на изменения liveData
@@ -42,7 +63,20 @@ class MainFragment : Fragment() {
         })
 
         // Запросили новые данные
-        viewModel.getWeather()
+        viewModel.getMovieFromLocalStorageRus()
+
+        binding.mainFAB.setOnClickListener {
+            isRussian = !isRussian
+
+            if (isRussian) {
+                viewModel.getMovieFromLocalStorageRus()
+                binding.mainFAB.setImageResource(R.drawable.ic_baseline_outlined_flag_24)
+            } else {
+                viewModel.getMovieFromLocalStorageWorld()
+                binding.mainFAB.setImageResource(R.drawable.ic_baseline_flag_24)
+            }
+
+        }
 
 
     }
@@ -50,12 +84,11 @@ class MainFragment : Fragment() {
     private fun render(state: AppState) {
 
         when (state) {
-            is AppState.Success -> {
+            is AppState.Success<*> -> {
+
+                val movie: List<Movie> = state.data as List<Movie>
+                adapter.setMovie(movie)
                 binding.loadingContainer.visibility = View.GONE
-                binding.titleMovie.text = state.movie.title
-                binding.ratingMovie.text = state.movie.rating.toString()
-                binding.aboutMovie.text = state.movie.about
-                binding.yearMovie.text = state.movie.year
             }
             is AppState.Error -> {
                 binding.loadingContainer.visibility = View.VISIBLE
@@ -64,7 +97,7 @@ class MainFragment : Fragment() {
                     Snackbar.LENGTH_INDEFINITE)
                     .setAction("Попробовать снова") {
                         // Запросили новые данные
-                        viewModel.getWeather()
+                        viewModel.getMovieFromLocalStorageRus()
                     }
                     .show()
             }

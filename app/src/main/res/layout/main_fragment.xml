@@ -5,73 +5,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.MainFragment"
-        android:gravity="top"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/image_movie"
-            android:layout_width="wrap_content"
-            android:layout_height="200sp"
-            android:src="@drawable/inception"
-            android:layout_margin="5sp"
-            />
-        <TextView
-            android:id="@+id/title_movie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="35sp"
-            android:padding="5sp"
-            tools:text="Название фильма" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5sp">
-            <TextView
-                android:id="@+id/year_movie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="35sp"
-                tools:text="2000"
-                />
-            <CheckBox
-                android:id="@+id/like_movie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="35sp"
-                />
-            <TextView
-                android:id="@+id/rating_movie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="35sp"
-                tools:text="10"
-                />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/main_item"/>
 
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/about_movie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:padding="5sp"
-            tools:text="@tools:sample/lorem/random" />
-
-
-
-    </LinearLayout>
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/main_FAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10pt"
+        android:tintMode="@null"
+        app:maxImageSize="60dp"
+        android:src="@drawable/ic_baseline_outlined_flag_24"/>
     <LinearLayout
 
         android:id="@+id/loadingContainer"
-        android:background="#6E6B63"
+        android:background="#EE2C3B44"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.MainFragment"
@@ -79,6 +34,7 @@
         android:orientation="vertical">
 
         <TextView
+
             android:id="@+id/loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
