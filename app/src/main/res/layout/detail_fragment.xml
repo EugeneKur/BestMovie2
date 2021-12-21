@@ -64,11 +64,5 @@
             android:textSize="20sp"
             android:padding="5sp"
             tools:text="@tools:sample/lorem/random" />
-
-
-
     </LinearLayout>
-
-
-
 </FrameLayout>

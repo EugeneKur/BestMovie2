@@ -24,15 +24,15 @@ class MainViewModel : ViewModel() {
         liveDataToObserve.value = AppState.Loading
 
         Thread {
-            Thread.sleep(2000)
+            Thread.sleep(1000)
 
 
-                val movie = if (isRussian) {
-                    repo.getMovieFromLocalStorageRus()
-                } else {
-                    repo.getWeatherFromLocalStorageWorld()
-                }
-                liveDataToObserve.postValue(AppState.Success(movie))
+            val movie = if (isRussian) {
+                repo.getMovieFromLocalStorageRus()
+            } else {
+                repo.getWeatherFromLocalStorageWorld()
+            }
+            liveDataToObserve.postValue(AppState.Success(movie))
 
 
         }.start()

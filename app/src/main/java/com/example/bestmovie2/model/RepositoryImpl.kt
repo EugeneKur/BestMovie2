@@ -1,17 +1,10 @@
 package com.example.bestmovie2.model
 
 class RepositoryImpl : Repository {
-    override fun getMovieFromServer(): Movie {
-        return Movie()
-    }
+    override fun getMovieFromServer(): Movie = Movie()
 
-    override fun getMovieFromLocalStorageRus(): List<Movie> {
-        return getRussianMovies()
-    }
+    override fun getMovieFromLocalStorageRus(): List<Movie> = getRussianMovies()
 
-    override fun getWeatherFromLocalStorageWorld(): List<Movie> {
-        return getWorldMovies()
-    }
-
+    override fun getWeatherFromLocalStorageWorld(): List<Movie> = getWorldMovies()
 
 }

@@ -41,12 +41,14 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val movie = arguments?.getParcelable<Movie>("MOVIE_EXTRA")
+        arguments?.getParcelable<Movie>("MOVIE_EXTRA")?.let { movie ->
+            binding.titleMovie.text = movie.title.name
+            binding.yearMovie.text = movie.title.year
+            binding.ratingMovie.text = movie.title.rating.toString()
+            binding.aboutMovie.text = movie.about
+        }
 
-        binding.titleMovie.text = movie?.title?.name ?: ""
-        binding.yearMovie.text = movie?.title?.year ?: ""
-        binding.ratingMovie.text = movie?.title?.rating.toString() ?: "0"
-        binding.aboutMovie.text = movie?.about ?: ""
+
         /*
         binding.imageMovie.imageAlpha= movie?.title?.image!! - не работает
          */

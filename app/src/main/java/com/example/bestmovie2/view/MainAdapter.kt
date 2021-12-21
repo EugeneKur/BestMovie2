@@ -34,13 +34,16 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     inner class MainViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
         fun bind(movie: Movie) {
-            itemView.findViewById<TextView>(R.id.main_title_name_view).text = movie.title.name
-            itemView.findViewById<ImageView>(R.id.main_item_image).setImageResource(movie.title.image)
-            itemView.setOnClickListener {
-                listener?.onClick(movie)
+            itemView.apply {
+                findViewById<TextView>(R.id.main_title_name_view).text = movie.title.name
+                findViewById<ImageView>(R.id.main_item_image).setImageResource(movie.title.image)
+                findViewById<TextView>(R.id.main_year_view).text = movie.title.year
+                findViewById<TextView>(R.id.main_rating_view).text = movie.title.rating.toString()
+                setOnClickListener {
+                    listener?.onClick(movie)
+                }
             }
         }
-
     }
 
     fun interface OnItemClick {
