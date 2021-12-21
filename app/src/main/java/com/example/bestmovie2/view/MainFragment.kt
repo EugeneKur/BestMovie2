@@ -25,7 +25,9 @@ class MainFragment : Fragment() {
     private val adapter = MainAdapter()
     private var isRussian = true
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by  lazy {
+        ViewModelProvider(this).get(MainViewModel::class.java)
+    }
 
 
     override fun onCreateView(
@@ -42,20 +44,19 @@ class MainFragment : Fragment() {
 
         binding.mainRecyclerView.adapter = adapter
 
-
-
         adapter.listener = MainAdapter.OnItemClick { movie ->
 
             val bundle = Bundle()
             bundle.putParcelable("MOVIE_EXTRA", movie)
 
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.main_container, DetailFragment.newInstance(bundle))
-                .addToBackStack("")
-                .commit()
-        }
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.main_container, DetailFragment.newInstance(bundle))
+                    .addToBackStack("")
+                    .commit()
+            }
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        }
 
         // Подписались на изменения liveData
         viewModel.getData().observe(viewLifecycleOwner, { state ->
@@ -88,21 +89,18 @@ class MainFragment : Fragment() {
 
                 val movie: List<Movie> = state.data as List<Movie>
                 adapter.setMovie(movie)
-                binding.loadingContainer.visibility = View.GONE
+                binding.loadingContainer.hide()
             }
             is AppState.Error -> {
-                binding.loadingContainer.visibility = View.VISIBLE
-                Snackbar.make(binding.root,
-                    state.error.message.toString(),
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Попробовать снова") {
+                binding.loadingContainer.show()
+                binding.root.showSnackBar(state.error.message.toString(),"Попробовать снова",
+                    {
                         // Запросили новые данные
                         viewModel.getMovieFromLocalStorageRus()
-                    }
-                    .show()
+                    })
             }
             is AppState.Loading ->
-                binding.loadingContainer.visibility = View.VISIBLE
+                binding.loadingContainer.show()
         }
 
     }
