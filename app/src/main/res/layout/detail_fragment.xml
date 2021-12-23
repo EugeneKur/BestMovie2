@@ -17,15 +17,15 @@
         <ImageView
             android:id="@+id/image_movie"
             android:layout_width="wrap_content"
-            android:layout_height="200sp"
+            android:layout_height="@dimen/image_height"
             android:src="@drawable/inception"
-            android:layout_margin="5sp"
+            android:layout_margin="@dimen/image_margin"
             />
         <TextView
             android:id="@+id/title_movie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="@dimen/big_text_size"
             android:textStyle="bold"
             android:padding="5sp"
             tools:text="Название фильма" />
@@ -38,20 +38,20 @@
                 android:id="@+id/year_movie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:textSize="@dimen/big_text_size"
                 tools:text="2000"
                 />
             <CheckBox
                 android:id="@+id/like_movie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:textSize="@dimen/big_text_size"
                 />
             <TextView
                 android:id="@+id/rating_movie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:textSize="@dimen/big_text_size"
                 tools:text="10"
                 />
 
@@ -61,8 +61,14 @@
             android:id="@+id/about_movie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="@dimen/small_text_size"
             android:padding="5sp"
             tools:text="@tools:sample/lorem/random" />
+
+
+
     </LinearLayout>
+
+
+
 </FrameLayout>

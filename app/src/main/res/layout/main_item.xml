@@ -33,9 +33,9 @@
                 android:layout_height="match_parent"
                 android:gravity="start|center_vertical"
                 tools:text="@tools:sample/lorem"
-                android:padding="8dp"
+                android:padding="@dimen/padding_text_item_size"
                 android:layout_margin="2dp"
-                android:textSize="20sp">
+                android:textSize="@dimen/small_text_size">
             </TextView>
             <TextView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
@@ -44,9 +44,9 @@
                 android:layout_height="match_parent"
                 android:gravity="start|center_vertical"
                 tools:text="@tools:sample/lorem"
-                android:padding="8dp"
+                android:padding="@dimen/padding_text_item_size"
                 android:layout_margin="2dp"
-                android:textSize="20sp">
+                android:textSize="@dimen/small_text_size">
             </TextView>
             <TextView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
@@ -55,9 +55,9 @@
                 android:layout_height="match_parent"
                 android:gravity="start|center_vertical"
                 tools:text="@tools:sample/lorem"
-                android:padding="8dp"
+                android:padding="@dimen/padding_text_item_size"
                 android:layout_margin="2dp"
-                android:textSize="20sp">
+                android:textSize="@dimen/small_text_size">
             </TextView>
 
         </LinearLayout>

@@ -54,6 +54,7 @@ class MainFragment : Fragment() {
                     .replace(R.id.main_container, DetailFragment.newInstance(bundle))
                     .addToBackStack("")
                     .commit()
+
             }
 
         }
