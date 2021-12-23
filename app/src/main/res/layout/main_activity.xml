@@ -8,8 +8,4 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
-    <fragment
-        android:name="com.example.bestmovie2.view.MainFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </LinearLayout>
