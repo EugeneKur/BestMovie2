@@ -11,6 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BestMovie2">
+        <receiver
+            android:name=".model.MainReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <service
+            android:name=".model.MainIntentService"
+            android:exported="false" />
+
         <activity
             android:name=".view.MainActivity"
             android:exported="true">
@@ -20,6 +29,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".model.MovieService" />
+
+        <receiver android:name=".model.ConnectBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

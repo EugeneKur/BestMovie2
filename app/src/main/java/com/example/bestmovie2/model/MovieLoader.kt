@@ -15,8 +15,6 @@ object MovieLoader {
 
     fun load(movie: Movie, listener: OnMovieLoadListener) {
 
-        val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
-        Thread {
             var urlConnection: HttpsURLConnection? = null
 
 
@@ -39,19 +37,14 @@ object MovieLoader {
 
                 val movieDTO = Gson().fromJson(result, MovieDTO::class.java)
 
-                handler.post {
-                    listener.onLoaded(movieDTO)
-                }
+                listener.onLoaded(movieDTO)
 
             } catch (e: Exception) {
-                handler.post {
-                    listener.onFailed(e)
-                }
+                listener.onFailed(e)
                 Log.e("DEBUGLOG", "Fail connection", e)
             } finally {
                 urlConnection?.disconnect()
             }
-        }.start()
 
     }
 
