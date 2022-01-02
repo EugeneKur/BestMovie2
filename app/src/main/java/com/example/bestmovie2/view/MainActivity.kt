@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         registerReceiver(receiver,
-            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        )
 
         supportFragmentManager.beginTransaction()
             .add(R.id.main_container, MainFragment.newInstance())

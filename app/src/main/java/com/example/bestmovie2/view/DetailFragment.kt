@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import coil.load
+import coil.transform.GrayscaleTransformation
 import com.example.bestmovie2.R
 import com.example.bestmovie2.databinding.DetailFragmentBinding
 import com.example.bestmovie2.viewmodel.MainViewModel
@@ -30,11 +32,16 @@ class DetailFragment : Fragment() {
     }
 
     private val listener = Repository.OnLoadListener {
-        RepositoryImpl.getMovieFromServer()?.let {movie ->
+        RepositoryImpl.getMovieFromServer()?.let { movie ->
             binding.titleMovie.text = movie.title.name
             binding.yearMovie.text = movie.title.year
             binding.ratingMovie.text = movie.title.rating.toString()
             binding.aboutMovie.text = movie.about
+
+            binding.imageMovie.load("https://image.tmdb.org/t/p/w500${movie.logo}") {
+                crossfade(true)
+                transformations(GrayscaleTransformation())
+            }
         } ?: Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
     }
     private var _binding: DetailFragmentBinding? = null
