@@ -89,6 +89,8 @@ class DetailFragment : Fragment() {
 
                 }
 
+
+
                 override fun onFailed(throwable: Throwable) {
                     Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
                 }
