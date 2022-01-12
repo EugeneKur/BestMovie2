@@ -1,21 +1,16 @@
 package com.example.bestmovie2.view
 
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import com.example.bestmovie2.R
 import com.example.bestmovie2.databinding.MainActivityBinding
-import com.example.bestmovie2.databinding.MainFragmentBinding
 import com.example.bestmovie2.model.ConnectBroadcastReceiver
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.URL
-import java.util.stream.Collectors
-import javax.net.ssl.HttpsURLConnection
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +25,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         registerReceiver(receiver,
-            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        )
 
         supportFragmentManager.beginTransaction()
             .add(R.id.main_container, MainFragment.newInstance())
@@ -38,8 +34,29 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.action_age -> {
+                item.setChecked(!item.isChecked)
+                return true
+            }
+            R.id.action_exit -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onDestroy() {
         unregisterReceiver(receiver)
         super.onDestroy()
     }
+
 }

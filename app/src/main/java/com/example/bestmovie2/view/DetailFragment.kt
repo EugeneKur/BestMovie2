@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import coil.load
+import coil.transform.GrayscaleTransformation
 import com.example.bestmovie2.R
 import com.example.bestmovie2.databinding.DetailFragmentBinding
 import com.example.bestmovie2.viewmodel.MainViewModel
@@ -17,7 +19,6 @@ import com.example.bestmovie2.model.*
 import com.example.bestmovie2.viewmodel.AppState
 import com.example.bestmovie2.viewmodel.DetailViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.detail_fragment.view.*
 
 class DetailFragment : Fragment() {
 
@@ -29,12 +30,26 @@ class DetailFragment : Fragment() {
         }
     }
 
+    private val viewModel: DetailViewModel by lazy {
+        ViewModelProvider(this).get(DetailViewModel::class.java)
+    }
+
     private val listener = Repository.OnLoadListener {
-        RepositoryImpl.getMovieFromServer()?.let {movie ->
+
+        RepositoryImpl.getMovieFromServer()?.let { movie ->
             binding.titleMovie.text = movie.title.name
             binding.yearMovie.text = movie.title.year
             binding.ratingMovie.text = movie.title.rating.toString()
             binding.aboutMovie.text = movie.about
+            movie.note = binding.noteMovie.text.toString()
+
+            binding.imageMovie.load("https://image.tmdb.org/t/p/w500${movie.logo}") {
+                crossfade(true)
+                transformations(GrayscaleTransformation())
+            }
+
+            viewModel.saveHistory(movie)
+
         } ?: Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
     }
     private var _binding: DetailFragmentBinding? = null

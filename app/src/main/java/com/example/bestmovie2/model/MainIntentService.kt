@@ -10,6 +10,7 @@ class MainIntentService : IntentService("MainIntentService") {
 
     companion object {
         const val  TAG = "MainIntentService"
+        private const val IS_WORLD_KEY = "LIST_OF_TOWNS_KEY"
     }
 
     override fun onHandleIntent(intent: Intent?) {
@@ -18,15 +19,19 @@ class MainIntentService : IntentService("MainIntentService") {
         Thread.sleep(2000)
 
         intent?.getParcelableExtra<Movie>("MOVIE_EXTRA")?.let {movie ->
-            MovieLoader.load(movie, object : MovieLoader.OnMovieLoadListener {
+            //MovieLoader.loadOkHttp(movie, object : MovieLoader.OnMovieLoadListener
+            MovieLoader.loadRetrofit(movie, object : MovieLoader.OnMovieLoadListener
+            {
                 override fun onLoaded(movieDTO: MovieDTO) {
                     applicationContext.sendBroadcast(Intent(applicationContext, MainReceiver::class.java).apply {
 
                         action = MainReceiver.MOVIE_LOADED
                         putExtra("MOVIE_EXTRA", Movie(
                             about = movieDTO.about ?: " ",
-                            title = Title(movieDTO.title ?: " ", movieDTO.vote_average ?: 0f, movieDTO.release_date ?: "2000")
-                        ))
+                            title = Title(movieDTO.title ?: " ", movieDTO.vote_average ?: 0f, movieDTO.release_date ?: "2000", id = movie.title.id),
+                            logo = movieDTO.poster_path ?: " ",
+
+                            ))
                     })
                 }
 

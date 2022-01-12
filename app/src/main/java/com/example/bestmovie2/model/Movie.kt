@@ -9,6 +9,8 @@ data class Movie (
     val title: Title = getDefaultTitle(),
     val about: String = "Когда засуха, пыльные бури и вымирание растений приводят человечество к продовольственному кризису, коллектив исследователей и учёных отправляется сквозь червоточину (которая предположительно соединяет области пространства-времени через большое расстояние) в путешествие, чтобы превзойти прежние ограничения для космических путешествий человека и найти планету с подходящими для человечества условиями.",
     val like: Boolean = true,
+    val logo: String = "",
+    var note: String = ""
 ): Parcelable
 
 @Parcelize
@@ -17,7 +19,7 @@ data class Title(
     val rating: Float = 0f,
     val year: String = "0",
     val image: Int = R.drawable.inception,
-    val id: Int = 27205
+    val id: Int = 27205,
 ): Parcelable
 
 fun getDefaultTitle() = Title("Начало", 10f, "2010", R.drawable.inception, 27205)

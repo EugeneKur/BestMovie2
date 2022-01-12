@@ -1,5 +1,6 @@
 package com.example.bestmovie2.view
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,6 +20,8 @@ class MainFragment : Fragment() {
     companion object {
         fun newInstance() = MainFragment()
     }
+
+
 
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
@@ -70,7 +73,7 @@ class MainFragment : Fragment() {
         binding.mainFAB.setOnClickListener {
             isRussian = !isRussian
 
-            if (isRussian) {
+            if (!isRussian) {
                 viewModel.getMovieFromLocalStorageRus()
                 binding.mainFAB.setImageResource(R.drawable.ic_baseline_outlined_flag_24)
             } else {
@@ -79,6 +82,11 @@ class MainFragment : Fragment() {
             }
 
         }
+
+        binding.historyFAB.setOnClickListener {
+            requireContext().startActivity(Intent(requireContext(), HistoryActivity::class.java))
+        }
+
 
 
     }
@@ -110,5 +118,6 @@ class MainFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
 }

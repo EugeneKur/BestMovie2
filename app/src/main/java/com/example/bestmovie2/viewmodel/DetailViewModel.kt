@@ -3,16 +3,22 @@ package com.example.bestmovie2.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.bestmovie2.model.Repository
-import com.example.bestmovie2.model.RepositoryImpl
+import androidx.lifecycle.ViewModelProvider
+import com.example.bestmovie2.model.*
+import com.example.bestmovie2.view.App
 import kotlin.random.Random
 
 class DetailViewModel : ViewModel() {
 
     private val  liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
     private val repo: Repository = RepositoryImpl
+    private val localRepo: LocalRepository = LocalRepositoryImpl(App.getHistoryDao())
 
     fun getData(): LiveData<AppState> = liveDataToObserve
+
+    fun saveHistory(movie: Movie) {
+        localRepo.saveEntity(movie)
+    }
 
     fun getMovie() {
         liveDataToObserve.value = AppState.Loading
