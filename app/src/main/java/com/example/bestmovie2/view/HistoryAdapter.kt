@@ -28,6 +28,7 @@ class HistoryAdapter(private var items: List<Movie>) :
             findViewById<TextView>(R.id.history_about).text = movie.about
             findViewById<TextView>(R.id.history_rating).text = movie.title.rating.toString()
             findViewById<TextView>(R.id.history_year).text = movie.title.year
+            findViewById<TextView>(R.id.history_note).text = movie.note
         }
     }
 

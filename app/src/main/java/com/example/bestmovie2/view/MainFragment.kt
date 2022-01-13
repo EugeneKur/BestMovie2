@@ -1,5 +1,6 @@
 package com.example.bestmovie2.view
 
+import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -23,6 +24,7 @@ class MainFragment : Fragment() {
 
 
 
+
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
     private val adapter = MainAdapter()
@@ -31,7 +33,6 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by  lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +46,11 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val sharedPreferences = activity?.getPreferences(Context.MODE_PRIVATE)
+        if (sharedPreferences != null) {
+            isRussian = sharedPreferences.getBoolean("key2", false)
+        }
+
         binding.mainRecyclerView.adapter = adapter
 
         adapter.listener = MainAdapter.OnItemClick { movie ->
@@ -57,7 +63,6 @@ class MainFragment : Fragment() {
                     .replace(R.id.main_container, DetailFragment.newInstance(bundle))
                     .addToBackStack("")
                     .commit()
-
             }
 
         }
@@ -68,23 +73,29 @@ class MainFragment : Fragment() {
         })
 
         // Запросили новые данные
-        viewModel.getMovieFromLocalStorageRus()
+        if (isRussian) {
+            viewModel.getMovieFromLocalStorageRus()
+        } else viewModel.getMovieFromLocalStorageWorld()
 
         binding.mainFAB.setOnClickListener {
-            isRussian = !isRussian
 
-            if (!isRussian) {
-                viewModel.getMovieFromLocalStorageRus()
-                binding.mainFAB.setImageResource(R.drawable.ic_baseline_outlined_flag_24)
-            } else {
+            if (isRussian) {
                 viewModel.getMovieFromLocalStorageWorld()
                 binding.mainFAB.setImageResource(R.drawable.ic_baseline_flag_24)
+                val editor = sharedPreferences?.edit()
+                editor?.putBoolean("key2", !isRussian)
+                editor?.apply()
+                isRussian = !isRussian
+            } else {
+                viewModel.getMovieFromLocalStorageRus()
+                binding.mainFAB.setImageResource(R.drawable.ic_baseline_outlined_flag_24)
+                val editor = sharedPreferences?.edit()
+                editor?.putBoolean("key2", !isRussian)
+                editor?.apply()
+                isRussian = !isRussian
             }
 
-        }
 
-        binding.historyFAB.setOnClickListener {
-            requireContext().startActivity(Intent(requireContext(), HistoryActivity::class.java))
         }
 
 

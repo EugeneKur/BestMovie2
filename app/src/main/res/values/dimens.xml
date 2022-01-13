@@ -2,8 +2,8 @@
 <resources>
     <dimen name="image_height">250sp</dimen>
     <dimen name="image_margin">5sp</dimen>
-    <dimen name="big_text_size">30sp</dimen>
-    <dimen name="small_text_size">20sp</dimen>
+    <dimen name="big_text_size">20sp</dimen>
+    <dimen name="small_text_size">15sp</dimen>
     <dimen name="loader_text_size">35sp</dimen>
     <dimen name="padding_text_item_size">8dp</dimen>
 </resources>

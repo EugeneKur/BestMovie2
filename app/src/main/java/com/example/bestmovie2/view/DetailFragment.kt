@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import coil.load
@@ -19,6 +20,7 @@ import com.example.bestmovie2.model.*
 import com.example.bestmovie2.viewmodel.AppState
 import com.example.bestmovie2.viewmodel.DetailViewModel
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.detail_fragment.*
 
 class DetailFragment : Fragment() {
 
@@ -41,15 +43,11 @@ class DetailFragment : Fragment() {
             binding.yearMovie.text = movie.title.year
             binding.ratingMovie.text = movie.title.rating.toString()
             binding.aboutMovie.text = movie.about
-            movie.note = binding.noteMovie.text.toString()
 
             binding.imageMovie.load("https://image.tmdb.org/t/p/w500${movie.logo}") {
                 crossfade(true)
                 transformations(GrayscaleTransformation())
             }
-
-            viewModel.saveHistory(movie)
-
         } ?: Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
     }
     private var _binding: DetailFragmentBinding? = null
@@ -115,6 +113,15 @@ class DetailFragment : Fragment() {
          */
     }
 
+    override fun onPause() {
+        RepositoryImpl.getMovieFromServer()?.let { movie ->
+
+            movie.note = binding.noteMovie.text.toString()
+            viewModel.saveHistory(movie)
+
+        } ?: Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+        super.onPause()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

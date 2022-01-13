@@ -21,6 +21,7 @@ class App: Application() {
         fun  getHistoryDao(): HistoryDao {
 
             if (db ==null) {
+
                 synchronized(HistoryDataBase::class.java) {
                     if (db == null) {
                         appInstance?.let { app ->

@@ -9,7 +9,7 @@
     android:padding="2dp"
     android:layout_margin="2dp"
     tools:context=".view.HistoryActivity"
-    android:background="#778899">
+    android:background="@drawable/gradient_background1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             tools:text="@tools:sample/cities"
             android:padding="@dimen/padding_text_item_size"
             android:layout_margin="2dp"
-            android:textSize="@dimen/small_text_size">
+            android:textSize="@dimen/big_text_size">
         </TextView>
         <TextView
             android:id="@+id/history_rating"
@@ -33,7 +33,7 @@
             tools:text="@tools:sample/us_phones"
             android:padding="@dimen/padding_text_item_size"
             android:layout_margin="2dp"
-            android:textSize="@dimen/small_text_size">
+            android:textSize="@dimen/big_text_size">
         </TextView>
         <TextView
             android:id="@+id/history_year"
@@ -43,7 +43,7 @@
             tools:text="@tools:sample/us_zipcodes"
             android:padding="@dimen/padding_text_item_size"
             android:layout_margin="2dp"
-            android:textSize="@dimen/small_text_size">
+            android:textSize="@dimen/big_text_size">
         </TextView>
     </LinearLayout>
     <TextView
@@ -54,10 +54,40 @@
         tools:text="@tools:sample/date/mmddyy"
         android:padding="@dimen/padding_text_item_size"
         android:layout_margin="2dp"
-        android:textSize="@dimen/small_text_size">
+        android:textSize="@dimen/big_text_size">
+    </TextView>
+    <TextView
+        android:id="@+id/history_about_title"
+        android:text="О фильме"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/padding_text_item_size"
+        android:layout_margin="2dp"
+        android:textSize="@dimen/big_text_size">
     </TextView>
     <TextView
         android:id="@+id/history_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        tools:text="@tools:sample/lorem"
+        android:padding="@dimen/padding_text_item_size"
+        android:layout_margin="2dp"
+        android:textSize="@dimen/small_text_size">
+    </TextView>
+    <TextView
+        android:id="@+id/history_note_title"
+        android:text="Заметка"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/padding_text_item_size"
+        android:layout_margin="2dp"
+        android:textSize="@dimen/big_text_size">
+    </TextView>
+    <TextView
+        android:id="@+id/history_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="start|center_vertical"
