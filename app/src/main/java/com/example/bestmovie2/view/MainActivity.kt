@@ -67,6 +67,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(applicationContext, HistoryActivity::class.java))
                 return true
             }
+            R.id.action_contacts -> {
+                startActivity(Intent(this, ContactsActivity::class.java))
+                return true
+            }
             R.id.action_exit -> {
                 finish()
                 return true
