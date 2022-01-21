@@ -14,7 +14,6 @@
         android:id="@+id/action_contacts"
         android:title="contacts"
         app:showAsAction="never"/>
-
     <item
         android:id="@+id/action_exit"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
