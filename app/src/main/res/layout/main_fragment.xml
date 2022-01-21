@@ -24,6 +24,16 @@
         android:tintMode="@null"
         app:maxImageSize="60dp"
         android:src="@drawable/ic_baseline_outlined_flag_24"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/location_FAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="10pt"
+        android:layout_marginBottom="40pt"
+        android:tintMode="@null"
+        app:maxImageSize="60dp"
+        android:src="@drawable/ic_baseline_location_on_24"/>
 
     <LinearLayout
 
