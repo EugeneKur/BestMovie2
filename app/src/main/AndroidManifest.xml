@@ -64,6 +64,13 @@
         </activity>
 
         <service android:name=".model.MovieService" />
+        <service
+            android:name=".model.MyFireBaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
 
         <receiver
             android:name=".model.ConnectBroadcastReceiver"
